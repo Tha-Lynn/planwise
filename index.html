@@ -1,0 +1,82 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Planwise</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <div class="app">
+    <aside class="sidebar">
+      <div class="brand"><span class="logo">◆</span> Planwise</div>
+      <nav id="nav" class="nav"></nav>
+      <div class="sidebar-section">
+        <div class="section-head">
+          <span>Projects</span>
+          <button class="icon-btn" data-action="add-project" title="Add project">+</button>
+        </div>
+        <ul id="projectList" class="project-list"></ul>
+      </div>
+      <div class="sidebar-foot">
+        <button class="link-btn" data-action="export">Export JSON</button>
+        <label class="link-btn">Import JSON<input type="file" id="importInput" accept="application/json,.json" hidden></label>
+      </div>
+    </aside>
+
+    <main class="main">
+      <header class="topbar">
+        <h1 id="viewTitle"></h1>
+        <label class="toggle"><input type="checkbox" id="showDone"> Show completed</label>
+        <div class="view-switch" id="viewSwitch" role="tablist">
+          <button data-action="layout" data-layout="list">List</button>
+          <button data-action="layout" data-layout="calendar">Calendar</button>
+          <button data-action="layout" data-layout="timeblock">Time blocks</button>
+          <button data-action="layout" data-layout="table">Table</button>
+        </div>
+      </header>
+
+      <form id="quickAdd" class="quick-add" autocomplete="off">
+        <input id="quickInput" placeholder='Add a task, e.g. "Draft report tomorrow 2-4pm p1 #Work @writing by fri"  (press Q)'>
+        <button type="submit" class="primary">Add</button>
+      </form>
+      <div id="quickPreview" class="quick-preview"></div>
+
+      <section id="content" class="content"></section>
+    </main>
+  </div>
+
+  <dialog id="taskDialog">
+    <form id="taskForm" method="dialog">
+      <input name="title" class="dlg-title" placeholder="Task name" required maxlength="300">
+      <textarea name="notes" placeholder="Notes" rows="3"></textarea>
+      <div class="dlg-grid">
+        <label>Project<select name="project"></select></label>
+        <label>Priority
+          <select name="priority">
+            <option value="1">P1 · Urgent</option>
+            <option value="2">P2 · High</option>
+            <option value="3">P3 · Medium</option>
+            <option value="4">P4 · None</option>
+          </select>
+        </label>
+        <label>Date<input type="date" name="due"></label>
+        <label>Time<input type="time" name="time" step="900"></label>
+        <label>Duration (min)<input type="number" name="duration" min="0" max="1440" step="15" placeholder="—"></label>
+        <label>Deadline<input type="date" name="deadline"></label>
+        <label class="wide">Labels<input name="labels" placeholder="comma separated"></label>
+      </div>
+      <p class="dlg-warn" id="dlgWarn"></p>
+      <div class="dlg-actions">
+        <button type="button" id="dlgDelete" class="danger">Delete</button>
+        <span class="spacer"></span>
+        <button type="button" id="dlgCancel">Cancel</button>
+        <button type="submit" class="primary">Save</button>
+      </div>
+    </form>
+  </dialog>
+
+  <script src="dates.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>

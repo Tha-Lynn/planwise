@@ -1,0 +1,17 @@
+{
+  "name": "planwise",
+  "version": "1.0.0",
+  "private": true,
+  "description": "A local-first, no-build task planner with deadlines, a calendar, time blocking and a table layout.",
+  "license": "MIT",
+  "scripts": {
+    "test": "node test/dates.test.js",
+    "test:e2e": "node test/e2e.js"
+  },
+  "devDependencies": {
+    "puppeteer-core": "^23.11.1"
+  },
+  "engines": {
+    "node": ">=18"
+  }
+}
